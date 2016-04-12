@@ -27,7 +27,7 @@ public class ArtistsAdapter extends ArrayAdapter<Artist> {
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
         TextView genres = (TextView) convertView.findViewById(R.id.genres);
-        name.setText(artist.name);
+        name.setText(artist.getName());
         genres.setText(artist.getGenres());
 
         return convertView;
