@@ -1,12 +1,19 @@
 package ru.shmakova.artistsapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -27,8 +34,12 @@ public class ArtistsAdapter extends ArrayAdapter<Artist> {
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
         TextView genres = (TextView) convertView.findViewById(R.id.genres);
+        TextView info = (TextView) convertView.findViewById(R.id.info);
+        ImageView cover = (ImageView) convertView.findViewById(R.id.cover);
         name.setText(artist.getName());
         genres.setText(artist.getGenres());
+        Picasso.with(parent.getContext()).load(artist.getCover().getSmall()).into(cover);
+        info.setText(artist.getAlbumsAndTracksInfo());
 
         return convertView;
     }

@@ -27,12 +27,8 @@ public class Artist {
         return cover;
     }
 
-    public String getTracksString() {
-        return tracks + " песен";
-    }
-
-    public String getAlbumsString() {
-        return albums + " альбомов" ;
+    public String getAlbumsAndTracksInfo() {
+        return albums + " альбомов, " + tracks + " песен";
     }
 
     public String getGenres() {
