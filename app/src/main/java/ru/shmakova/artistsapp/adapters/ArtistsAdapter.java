@@ -38,7 +38,7 @@ public class ArtistsAdapter extends ArrayAdapter<Artist> {
         name.setText(artist.getName());
         genres.setText(artist.getGenres());
         Picasso.with(parent.getContext()).load(artist.getCover().getSmall()).into(cover);
-        info.setText(artist.getAlbumsAndTracksInfo());
+        info.setText(artist.getAlbums() + ", " + artist.getTracks());
 
         return convertView;
     }

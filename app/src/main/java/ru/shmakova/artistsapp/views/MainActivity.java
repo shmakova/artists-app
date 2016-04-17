@@ -1,8 +1,11 @@
 package ru.shmakova.artistsapp.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -54,5 +57,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a,
+                                    View v, int position, long id) {
+                Artist artist = (Artist) a.getItemAtPosition(position);
+                Intent intent = new Intent(v.getContext(), ArtistActivity.class);
+                intent.putExtra("artist", artist);
+                startActivity(intent);
+            }
+        });
     }
 }
