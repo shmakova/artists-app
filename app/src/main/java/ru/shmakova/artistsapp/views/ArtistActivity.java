@@ -25,7 +25,9 @@ public class ArtistActivity extends AppCompatActivity {
         TextView genres = (TextView) findViewById(R.id.genres);
         genres.setText(artist.getGenres());
         TextView info = (TextView) findViewById(R.id.info);
-        info.setText(artist.getAlbums() + "  \u00b7  " + artist.getTracks());
+        info.setText(getResources().getQuantityString(R.plurals.albums, artist.getAlbums(), artist.getAlbums())
+                + "  \u00b7  "
+                + getResources().getQuantityString(R.plurals.tracks, artist.getTracks(), artist.getTracks()));
         TextView description = (TextView) findViewById(R.id.description);
         description.setText(artist.getDescription());
     }

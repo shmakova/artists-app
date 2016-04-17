@@ -3,4 +3,22 @@
     <string name="main_activity_name">Исполнители</string>
     <string name="biography">Биография</string>
     <string name="cover">Обложка</string>
+
+    <plurals name="tracks">
+        <item quantity="zero">%d песен</item>
+        <item quantity="one">%d песня</item>
+        <item quantity="two">%d песни</item>
+        <item quantity="few">%d песни</item>
+        <item quantity="many">%d песен</item>
+        <item quantity="other">%d песен</item>
+    </plurals>
+
+    <plurals name="albums">
+        <item quantity="zero">%d альбомов</item>
+        <item quantity="one">%d альбом</item>
+        <item quantity="two">%d альбома</item>
+        <item quantity="few">%d альбома</item>
+        <item quantity="many">%d альбомов</item>
+        <item quantity="other">%d альбомов</item>
+    </plurals>
 </resources>

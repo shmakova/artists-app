@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArtistsAdapter(this, artists);
         listView.setAdapter(adapter);
 
+        for (int i = 0; i < 30; i++) {
+            String pluralAndroid = this.getResources().getQuantityString(R.plurals.tracks, i, i);
+            android.util.Log.i("Plurals", pluralAndroid);
+        }
+
         Call<ArrayList<Artist>> call = service.listArtists();
         call.enqueue(new Callback<ArrayList<Artist>>() {
             @Override

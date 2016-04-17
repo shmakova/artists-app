@@ -6,8 +6,6 @@ import android.text.TextUtils;
 
 import java.util.ArrayList;
 
-import ru.shmakova.artistsapp.models.Cover;
-
 /**
  * Created by shmakova on 12.04.16.
  */
@@ -29,12 +27,12 @@ public class Artist implements Parcelable {
         return link;
     }
 
-    public String getTracks() {
-        return tracks + " песен";
+    public int getTracks() {
+        return tracks;
     }
 
-    public String getAlbums() {
-        return albums + " альбомов";
+    public int getAlbums() {
+        return albums;
     }
 
     public int getId() {
