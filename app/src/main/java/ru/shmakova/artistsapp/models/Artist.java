@@ -34,6 +34,6 @@ public class Artist {
     }
 
     public String getGenres() {
-        return TextUtils.join(",", genres);
+        return TextUtils.join(", ", genres);
     }
 }
