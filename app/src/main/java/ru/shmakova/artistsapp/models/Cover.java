@@ -1,4 +1,4 @@
-package ru.shmakova.artistsapp;
+package ru.shmakova.artistsapp.models;
 
 /**
  * Created by shmakova on 15.04.16.

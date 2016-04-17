@@ -1,4 +1,4 @@
-package ru.shmakova.artistsapp;
+package ru.shmakova.artistsapp.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.shmakova.artistsapp.R;
+import ru.shmakova.artistsapp.adapters.ArtistsAdapter;
+import ru.shmakova.artistsapp.models.Artist;
+import ru.shmakova.artistsapp.services.YandexService;
 
 public class MainActivity extends AppCompatActivity {
     private Retrofit retrofit = new Retrofit.Builder()

@@ -1,8 +1,10 @@
-package ru.shmakova.artistsapp;
+package ru.shmakova.artistsapp.models;
 
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+
+import ru.shmakova.artistsapp.models.Cover;
 
 /**
  * Created by shmakova on 12.04.16.

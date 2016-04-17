@@ -1,9 +1,10 @@
-package ru.shmakova.artistsapp;
+package ru.shmakova.artistsapp.services;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import ru.shmakova.artistsapp.models.Artist;
 
 /**
  * Created by shmakova on 13.04.16.

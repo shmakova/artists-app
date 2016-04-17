@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ArtistsApp</string>
+    <string name="main_activity_name">Исполнители</string>
 </resources>
