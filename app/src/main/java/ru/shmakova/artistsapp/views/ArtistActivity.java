@@ -1,7 +1,6 @@
 package ru.shmakova.artistsapp.views;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +18,7 @@ public class ArtistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist);
-        Artist artist = (Artist) getIntent().getParcelableExtra("artist");
+        Artist artist = getIntent().getParcelableExtra("artist");
         getSupportActionBar().setTitle(artist.getName());
         ImageView cover = (ImageView) findViewById(R.id.cover);
         Picasso.with(this).load(artist.getCover().getBig()).into(cover);
