@@ -1,5 +1,7 @@
 package ru.shmakova.artistsapp.views;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,20 +13,26 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.adapters.ArtistsAdapter;
 import ru.shmakova.artistsapp.models.Artist;
+import ru.shmakova.artistsapp.services.CacheClient;
 import ru.shmakova.artistsapp.services.YandexService;
 
 public class MainActivity extends AppCompatActivity {
+    private OkHttpClient client = new CacheClient().getClient();
+
     private Retrofit retrofit = new Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("http://download.cdn.yandex.net/")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
             .build();
 
     private YandexService service = retrofit.create(YandexService.class);
@@ -40,11 +48,6 @@ public class MainActivity extends AppCompatActivity {
         artists = new ArrayList<Artist>();
         adapter = new ArtistsAdapter(this, artists);
         listView.setAdapter(adapter);
-
-        for (int i = 0; i < 30; i++) {
-            String pluralAndroid = this.getResources().getQuantityString(R.plurals.tracks, i, i);
-            android.util.Log.i("Plurals", pluralAndroid);
-        }
 
         Call<ArrayList<Artist>> call = service.listArtists();
         call.enqueue(new Callback<ArrayList<Artist>>() {
@@ -64,12 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> a,
-                                    View v, int position, long id) {
-                Artist artist = (Artist) a.getItemAtPosition(position);
-                Intent intent = new Intent(v.getContext(), ArtistActivity.class);
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+                Artist artist = (Artist) adapterView.getItemAtPosition(position);
+                Intent intent = new Intent(view.getContext(), ArtistActivity.class);
                 intent.putExtra("artist", artist);
-                startActivity(intent);
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation((Activity) view.getContext(), view, "cover");
+                startActivity(intent, options.toBundle());
             }
         });
     }
