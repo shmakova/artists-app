@@ -2,6 +2,8 @@ package ru.shmakova.artistsapp.views;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,12 +22,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.adapters.ArtistsAdapter;
 import ru.shmakova.artistsapp.models.Artist;
 import ru.shmakova.artistsapp.services.CacheClient;
 import ru.shmakova.artistsapp.services.YandexService;
+import ru.shmakova.artistsapp.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
     private OkHttpClient client = new CacheClient().getClient();
@@ -43,7 +46,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        runTask();
+    }
 
+    private void runTask() {
+        if (Utils.isNetworkAvailable(this)) {
+            showArtistsList();
+        } else {
+            showInternetUnavailableAlert();
+        }
+    }
+
+    private void showArtistsList() {
         ListView listView = (ListView) findViewById(R.id.listView);
         artists = new ArrayList<Artist>();
         adapter = new ArtistsAdapter(this, artists);
@@ -77,5 +91,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent, options.toBundle());
             }
         });
+    }
+
+    private void showInternetUnavailableAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.error);
+        builder.setMessage(R.string.error_message);
+
+        builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+                runTask();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        Toast.makeText(this, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
     }
 }

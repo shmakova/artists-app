@@ -3,6 +3,11 @@
     <string name="main_activity_name">Исполнители</string>
     <string name="biography">Биография</string>
     <string name="cover">Обложка</string>
+    <string name="error">Ошибка</string>
+    <string name="error_message">Невозможно загрузить данные из интернета</string>
+    <string name="retry">Повторить</string>
+    <string name="network_unavailable">Сеть недоступна</string>
+    <string name="host_url"></string>
 
     <plurals name="tracks">
         <item quantity="zero">%d песен</item>
