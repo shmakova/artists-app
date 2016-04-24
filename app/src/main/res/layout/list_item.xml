@@ -8,10 +8,11 @@
     android:paddingBottom="20dp">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:transitionName="cover"
         android:id="@+id/cover"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/cover" />
 
     <RelativeLayout
@@ -22,7 +23,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/name"
