@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:transitionName="cover"
+        android:transitionName="@string/transition_cover"
         android:id="@+id/cover"
         android:scaleType="centerCrop"
         android:contentDescription="@string/cover" />

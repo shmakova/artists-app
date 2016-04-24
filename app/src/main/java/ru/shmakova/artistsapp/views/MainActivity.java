@@ -22,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.adapters.ArtistsAdapter;
 import ru.shmakova.artistsapp.models.Artist;
@@ -87,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), ArtistActivity.class);
                 intent.putExtra("artist", artist);
                 ActivityOptions options = ActivityOptions
-                        .makeSceneTransitionAnimation((Activity) view.getContext(), view, "cover");
+                        .makeSceneTransitionAnimation((Activity) view.getContext(),
+                                view,
+                                App.getContext().getString(R.string.transition_cover));
                 startActivity(intent, options.toBundle());
             }
         });

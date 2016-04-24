@@ -32,15 +32,21 @@ public class ArtistsAdapter extends ArrayAdapter<Artist> {
         }
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
-        TextView genres = (TextView) convertView.findViewById(R.id.genres);
-        TextView info = (TextView) convertView.findViewById(R.id.info);
-        ImageView cover = (ImageView) convertView.findViewById(R.id.cover);
         name.setText(artist.getName());
+
+        TextView genres = (TextView) convertView.findViewById(R.id.genres);
         genres.setText(artist.getGenres());
-        Picasso.with(parent.getContext()).load(artist.getCover().getSmall()).into(cover);
+
+        TextView info = (TextView) convertView.findViewById(R.id.info);
         info.setText(convertView.getResources().getQuantityString(R.plurals.albums, artist.getAlbums(), artist.getAlbums())
                 + ", "
                 + convertView.getResources().getQuantityString(R.plurals.tracks, artist.getTracks(), artist.getTracks()));
+
+        ImageView cover = (ImageView) convertView.findViewById(R.id.cover);
+        Picasso.with(parent.getContext())
+                .load(artist.getCover().getSmall())
+                .placeholder(R.drawable.placeholder)
+                .into(cover);
 
         return convertView;
     }

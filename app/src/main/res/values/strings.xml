@@ -8,6 +8,7 @@
     <string name="retry">Повторить</string>
     <string name="network_unavailable">Сеть недоступна</string>
     <string name="host_url"></string>
+    <string name="transition_cover">cover</string>
 
     <plurals name="tracks">
         <item quantity="zero">%d песен</item>
