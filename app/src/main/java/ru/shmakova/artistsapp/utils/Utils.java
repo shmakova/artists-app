@@ -8,6 +8,11 @@ import android.net.NetworkInfo;
  * Created by shmakova on 21.04.16.
  */
 public class Utils {
+    /**
+     * Network available check
+     * @param context
+     * @return
+     */
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

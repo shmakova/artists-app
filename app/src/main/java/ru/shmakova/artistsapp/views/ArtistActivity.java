@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.models.Artist;
 
@@ -37,7 +39,11 @@ public class ArtistActivity extends AppCompatActivity {
 
                     @Override
                     public void onError() {
-
+                        Toast.makeText(
+                                App.getContext(),
+                                R.string.network_unavailable,
+                                Toast.LENGTH_SHORT
+                        ).show();
                     }
                 });
 
@@ -45,20 +51,27 @@ public class ArtistActivity extends AppCompatActivity {
         genres.setText(artist.getGenres());
 
         TextView info = (TextView) findViewById(R.id.info);
-        info.setText(getResources().getQuantityString(R.plurals.albums, artist.getAlbums(), artist.getAlbums())
-                + "  \u00b7  "
-                + getResources().getQuantityString(R.plurals.tracks, artist.getTracks(), artist.getTracks()));
+        info.setText(artist.getTracksAndAlbumsInfo(" ·"));
 
         TextView description = (TextView) findViewById(R.id.description);
         description.setText(artist.getDescription());
     }
 
+    /**
+     * On Back button pressed
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         supportFinishAfterTransition();
     }
 
+
+    /**
+     * On Action bar back button pressed
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

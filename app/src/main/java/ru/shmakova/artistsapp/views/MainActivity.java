@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Load Artists list and show it
+     */
     private void showArtistsList() {
         ListView listView = (ListView) findViewById(R.id.listView);
         artists = new ArrayList<Artist>();
@@ -96,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Show Internet Unavailable Alert Dialog
+     */
     private void showInternetUnavailableAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.error);

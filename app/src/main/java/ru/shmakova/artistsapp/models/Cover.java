@@ -19,16 +19,8 @@ public class Cover implements Parcelable {
         return small;
     }
 
-    public void setSmall(String small) {
-        this.small = small;
-    }
-
     public String getBig() {
         return big;
-    }
-
-    public void setBig(String big) {
-        this.big = big;
     }
 
     @Override
