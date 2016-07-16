@@ -1,4 +1,4 @@
-package ru.shmakova.artistsapp.adapters;
+package ru.shmakova.artistsapp.ui.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

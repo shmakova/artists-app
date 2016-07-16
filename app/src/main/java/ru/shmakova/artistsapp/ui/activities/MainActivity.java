@@ -1,12 +1,12 @@
-package ru.shmakova.artistsapp.views;
+package ru.shmakova.artistsapp.ui.activities;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,13 +24,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
-import ru.shmakova.artistsapp.adapters.ArtistsAdapter;
 import ru.shmakova.artistsapp.models.Artist;
-import ru.shmakova.artistsapp.services.CacheClient;
-import ru.shmakova.artistsapp.services.YandexService;
+import ru.shmakova.artistsapp.network.CacheClient;
+import ru.shmakova.artistsapp.network.YandexService;
+import ru.shmakova.artistsapp.ui.adapters.ArtistsAdapter;
 import ru.shmakova.artistsapp.utils.Utils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private OkHttpClient client = new CacheClient().getClient();
 
     private Retrofit retrofit = new Retrofit.Builder()

@@ -1,4 +1,4 @@
-package ru.shmakova.artistsapp.services;
+package ru.shmakova.artistsapp.network.interceptors;
 
 import java.io.IOException;
 

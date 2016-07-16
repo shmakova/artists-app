@@ -1,4 +1,4 @@
-package ru.shmakova.artistsapp.views;
+package ru.shmakova.artistsapp.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,14 +19,14 @@ import ru.shmakova.artistsapp.models.Artist;
 /**
  * Created by shmakova on 17.04.16.
  */
-public class ArtistActivity extends AppCompatActivity {
+public class ArtistActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist);
 
         Artist artist = getIntent().getParcelableExtra("artist");
-        getSupportActionBar().setTitle(artist.getName());
+        toolbar().setTitle(artist.getName());
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         ImageView cover = (ImageView) findViewById(R.id.cover);

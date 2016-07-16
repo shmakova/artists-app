@@ -12,7 +12,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import ru.shmakova.artistsapp.models.Artist;
-import ru.shmakova.artistsapp.views.MainActivity;
+import ru.shmakova.artistsapp.ui.activities.MainActivity;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;

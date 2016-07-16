@@ -1,4 +1,4 @@
-package ru.shmakova.artistsapp.services;
+package ru.shmakova.artistsapp.network;
 
 
 import java.io.File;
@@ -6,6 +6,7 @@ import java.io.File;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import ru.shmakova.artistsapp.App;
+import ru.shmakova.artistsapp.network.interceptors.CachingInterceptor;
 
 /**
  * Created by shmakova on 21.04.16.
