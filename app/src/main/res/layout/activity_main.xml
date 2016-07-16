@@ -19,7 +19,6 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <include layout="@layout/artists_list_content"/>
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
