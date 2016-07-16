@@ -1,4 +1,4 @@
-package ru.shmakova.artistsapp.models;
+package ru.shmakova.artistsapp.network.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

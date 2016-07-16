@@ -22,7 +22,7 @@ ext.versions = [
 
         retrofit                     : '2.1.0',
         gson                         : '2.6.2',
-        okhttp                       : '3.2.0',
+        okhttp                       : '3.4.1',
         picasso                      : '2.5.2',
 
         supportLibs                  : '23.1.1',
@@ -76,6 +76,7 @@ ext.libraries = [
         converterGson           : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
         gson                    : "com.google.code.gson:gson:$versions.gson",
         okhttp                  : "com.squareup.okhttp3:okhttp:$versions.okhttp",
+        okhttpLogging           : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
         picasso                 : "com.squareup.picasso:picasso:$versions.picasso",
 
         // Developer Tools

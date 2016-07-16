@@ -98,11 +98,14 @@ dependencies {
 
     compile libraries.timber
 
-    compile libraries.retrofit
+    compile (libraries.retrofit) {
+        exclude module: 'okhttp'
+    }
     compile libraries.converterGson
     compile libraries.gson
     compile libraries.okhttp
     compile libraries.picasso
+    compile libraries.okhttpLogging
 
     // Developer tools (Developer Settings)
     compile libraries.stetho
