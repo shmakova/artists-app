@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingTop="20dp"
-    android:paddingLeft="20dp"
-    android:paddingBottom="20dp">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/artist_item"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardBackgroundColor="@color/white">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:paddingTop="20dp"
+                  android:paddingLeft="20dp"
+                  android:paddingBottom="20dp">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:transitionName="@string/transition_cover"
-        android:id="@+id/cover"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/cover" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:transitionName="@string/transition_cover"
+            android:id="@+id/cover"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/cover" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp">
-
-        <LinearLayout
-            android:orientation="vertical"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:layout_alignParentBottom="true" />
 
-            <TextView
-                android:id="@+id/genres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
+    </LinearLayout>
 
-    </RelativeLayout>
-
-</LinearLayout>
+    <View style="@style/line"></View>
+</android.support.v7.widget.CardView>

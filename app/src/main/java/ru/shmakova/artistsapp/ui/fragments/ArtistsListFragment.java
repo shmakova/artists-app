@@ -3,6 +3,7 @@ package ru.shmakova.artistsapp.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,6 +22,7 @@ import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.managers.DataManager;
 import ru.shmakova.artistsapp.network.models.Artist;
 import ru.shmakova.artistsapp.ui.adapters.ArtistsAdapter;
+import ru.shmakova.artistsapp.utils.AppConfig;
 
 public class ArtistsListFragment extends BaseFragment {
     private static final String TAG = "ArtistsListFragment";
@@ -59,6 +61,17 @@ public class ArtistsListFragment extends BaseFragment {
                         @Override
                         public void onArtistItemClickListener(int position) {
                             Artist artist = artists.get(position);
+                            Log.d(TAG, artist.toString());
+
+                            Bundle args = new Bundle();
+                            args.putParcelable(AppConfig.ARTIST_KEY, artist);
+                            Fragment artistFragment = new ArtistFragment();
+                            artistFragment.setArguments(args);
+
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.main_frame_layout, artistFragment)
+                                    .commit();
                         }
                     });
                     recyclerView.setAdapter(artistsAdapter);

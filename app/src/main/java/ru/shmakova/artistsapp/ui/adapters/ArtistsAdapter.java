@@ -1,6 +1,7 @@
 package ru.shmakova.artistsapp.ui.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.shmakova.artistsapp.network.models.Artist;
 import ru.shmakova.artistsapp.R;
 
@@ -54,27 +58,30 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
         return artists.size();
     }
 
-    public static class ArtistViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        protected ImageView cover;
-        protected TextView name, genres, info;
+    public static class ArtistViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.cover)
+        ImageView cover;
+        @BindView(R.id.name)
+        TextView name;
+        @BindView(R.id.genres)
+        TextView genres;
+        @BindView(R.id.info)
+        TextView info;
+
         private CustomClickListener listener;
 
         public ArtistViewHolder(View itemView, CustomClickListener customClickListener) {
             super(itemView);
             listener = customClickListener;
 
-            name = (TextView) itemView.findViewById(R.id.name);
-            genres = (TextView) itemView.findViewById(R.id.genres);
-            info = (TextView) itemView.findViewById(R.id.info);
-            cover = (ImageView) itemView.findViewById(R.id.cover);
+            ButterKnife.bind(this, itemView);
         }
 
-        @Override
-        public void onClick(View v) {
+        @OnClick(R.id.artist_item)
+        public void onArtistItemClick(View view) {
             if (listener != null) {
                 listener.onArtistItemClickListener(getAdapterPosition());
             }
-
         }
 
         public interface CustomClickListener {

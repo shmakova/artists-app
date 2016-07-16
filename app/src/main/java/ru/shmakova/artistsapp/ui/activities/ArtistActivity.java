@@ -22,12 +22,12 @@ public class ArtistActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artist);
+        setContentView(R.layout.activity_main);
 
         Artist artist = getIntent().getParcelableExtra("artist");
         toolbar().setTitle(artist.getName());
 
-        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         ImageView cover = (ImageView) findViewById(R.id.cover);
         Picasso.with(this).load(artist.getCover().getBig())
                 .into(cover, new Callback() {

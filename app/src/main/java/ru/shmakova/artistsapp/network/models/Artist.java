@@ -99,4 +99,9 @@ public class Artist implements Parcelable {
             return new Artist[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Artist: " + name;
+    }
 }
