@@ -10,6 +10,12 @@
     <string name="network_unavailable">Сеть недоступна</string>
     <string name="host_url"></string>
     <string name="transition_cover">cover</string>
+    <string name="about">О программе</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="about_text">Тестовое приложение для проекта Яндекса «Мобилизация»</string>
+    <string name="email">shmakova-nastya@yandex.ru</string>
+    <string name="send_email">Отправить e-mail</string>
+    <string name="email_subject">Обратная связь</string>
 
     <plurals name="tracks">
         <item quantity="zero">%d песен</item>
