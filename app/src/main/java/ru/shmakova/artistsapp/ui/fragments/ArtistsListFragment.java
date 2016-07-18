@@ -1,9 +1,10 @@
 package ru.shmakova.artistsapp.ui.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,12 +22,13 @@ import retrofit2.Response;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.managers.DataManager;
 import ru.shmakova.artistsapp.network.models.Artist;
+import ru.shmakova.artistsapp.ui.activities.MainActivity;
 import ru.shmakova.artistsapp.ui.adapters.ArtistsAdapter;
-import ru.shmakova.artistsapp.utils.AppConfig;
 
 public class ArtistsListFragment extends BaseFragment {
     private static final String TAG = "ArtistsListFragment";
 
+    private OnArtistClickListener callback;
     private DataManager dataManager;
     private List<Artist> artists;
     private ArtistsAdapter artistsAdapter;
@@ -43,6 +45,7 @@ public class ArtistsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
+        updateToolBar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         dataManager = DataManager.getInstance();
@@ -61,17 +64,7 @@ public class ArtistsListFragment extends BaseFragment {
                         @Override
                         public void onArtistItemClickListener(int position) {
                             Artist artist = artists.get(position);
-                            Log.d(TAG, artist.toString());
-
-                            Bundle args = new Bundle();
-                            args.putParcelable(AppConfig.ARTIST_KEY, artist);
-                            Fragment artistFragment = new ArtistFragment();
-                            artistFragment.setArguments(args);
-
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.main_frame_layout, artistFragment)
-                                    .commit();
+                            callback.onArtistClick(artist);
                         }
                     });
                     recyclerView.setAdapter(artistsAdapter);
@@ -85,5 +78,36 @@ public class ArtistsListFragment extends BaseFragment {
 
             }
         });
+    }
+
+    public interface OnArtistClickListener {
+        void onArtistClick(Artist artist);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            callback = (OnArtistClickListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnArtistClickedListener");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateToolBar();
+    }
+
+    /**
+     * Updates toolbar
+     */
+    private void updateToolBar() {
+        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle(R.string.main_activity_name);
+        actionBar.setDisplayHomeAsUpEnabled(false);
     }
 }

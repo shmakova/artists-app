@@ -6,5 +6,4 @@ package ru.shmakova.artistsapp.utils;
 
 public interface AppConfig {
     String BASE_URL = "http://download.cdn.yandex.net/";
-    String ARTIST_KEY = "ARTIST_KEY";
 }

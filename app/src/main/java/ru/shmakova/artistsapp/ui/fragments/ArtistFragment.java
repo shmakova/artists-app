@@ -3,6 +3,7 @@ package ru.shmakova.artistsapp.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.haha.perflib.Main;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -17,9 +19,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.network.models.Artist;
-import ru.shmakova.artistsapp.utils.AppConfig;
+import ru.shmakova.artistsapp.ui.activities.MainActivity;
 
 public class ArtistFragment extends BaseFragment {
+    private static final String ARTIST_KEY = "ARTIST_KEY";
+    private Artist artist;
+
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.cover)
@@ -31,6 +36,7 @@ public class ArtistFragment extends BaseFragment {
     @BindView(R.id.description)
     TextView description;
 
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,9 +46,9 @@ public class ArtistFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Artist artist = getArguments().getParcelable(AppConfig.ARTIST_KEY);
+        artist = getArguments().getParcelable(ARTIST_KEY);
         ButterKnife.bind(this, view);
-        //toolbar.setTitle(artist.getName());
+        updateToolBar(artist.getName());
 
         Picasso.with(view.getContext())
                 .load(artist.getCover().getBig())
@@ -61,5 +67,29 @@ public class ArtistFragment extends BaseFragment {
         genres.setText(artist.getGenres());
         info.setText(artist.getTracksAndAlbumsInfo(" ·"));
         description.setText(artist.getDescription());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateToolBar(artist.getName());
+    }
+
+    public static ArtistFragment newInstance(Artist artist) {
+        Bundle args = new Bundle();
+        ArtistFragment fragment = new ArtistFragment();
+        args.putParcelable(ARTIST_KEY, artist);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    /**
+     * Updates toolbar
+     * @param text
+     */
+    private void updateToolBar(String text) {
+        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle(text);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 }

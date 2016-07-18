@@ -8,22 +8,22 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:orientation="horizontal"
-                  android:paddingTop="20dp"
-                  android:paddingLeft="20dp"
-                  android:paddingBottom="20dp">
+                  android:paddingTop="@dimen/spacing_normal_16"
+                  android:paddingLeft="@dimen/spacing_normal_16"
+                  android:paddingBottom="@dimen/spacing_normal_16">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:transitionName="@string/transition_cover"
             android:id="@+id/cover"
+            android:layout_width="@dimen/cover_size"
+            android:layout_height="@dimen/cover_size"
+            android:transitionName="@string/transition_cover"
             android:scaleType="centerCrop"
             android:contentDescription="@string/cover" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="@dimen/spacing_normal_16">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -34,7 +34,8 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textSize="@dimen/font_medium_20"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/genres"

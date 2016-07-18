@@ -9,53 +9,54 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/cover"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cover"
             android:transitionName="@string/transition_cover"
             android:scaleType="centerCrop"
             android:contentDescription="@string/cover" />
 
         <ProgressBar
+            android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/progress_bar"
-            android:layout_margin="30dp"
+            android:layout_margin="@dimen/spacing_medium_32"
             android:layout_gravity="center" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:layout_margin="@dimen/spacing_medial_24">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/genres"
-                android:layout_marginBottom="15dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal_16" />
+
+            <TextView
                 android:id="@+id/info"
-                android:layout_marginBottom="15dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/biography"
+                android:layout_marginBottom="@dimen/spacing_normal_16" />
+
+            <TextView
                 android:id="@+id/biography"
-                android:layout_marginBottom="10dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:lineSpacingExtra="8dp"
-                android:id="@+id/description" />
+                android:textSize="@dimen/font_medium_20"
+                android:textColor="@color/black"
+                android:text="@string/biography"
+                android:layout_marginBottom="@dimen/spacing_small_8" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="@dimen/spacing_small_8" />
         </LinearLayout>
 
     </LinearLayout>
