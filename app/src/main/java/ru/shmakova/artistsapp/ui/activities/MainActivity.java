@@ -2,7 +2,6 @@ package ru.shmakova.artistsapp.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import javax.inject.Inject;
@@ -11,12 +10,10 @@ import javax.inject.Named;
 import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.developer_settings.DeveloperSettingsModule;
-import ru.shmakova.artistsapp.network.models.Artist;
-import ru.shmakova.artistsapp.ui.fragments.ArtistFragment;
 import ru.shmakova.artistsapp.ui.fragments.ArtistsListFragment;
 import ru.shmakova.artistsapp.ui.other.ViewModifier;
 
-public class MainActivity extends BaseActivity implements ArtistsListFragment.OnArtistClickListener {
+public class MainActivity extends BaseActivity {
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
@@ -35,17 +32,6 @@ public class MainActivity extends BaseActivity implements ArtistsListFragment.On
                     .replace(R.id.main_frame_layout, new ArtistsListFragment())
                     .commit();
         }
-    }
-
-    @Override
-    public void onArtistClick(Artist artist) {
-        Fragment artistFragment = ArtistFragment.newInstance(artist);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_frame_layout, artistFragment)
-                .addToBackStack(null)
-                .commit();
     }
 
     /**

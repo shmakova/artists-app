@@ -104,7 +104,7 @@ dependencies {
     compile libraries.converterGson
     compile libraries.gson
     compile libraries.okhttp
-    compile libraries.picasso
+    compile libraries.glide
     compile libraries.okhttpLogging
 
     // Developer tools (Developer Settings)

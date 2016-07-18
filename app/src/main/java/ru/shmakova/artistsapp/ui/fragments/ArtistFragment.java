@@ -8,12 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.haha.perflib.Main;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,9 +22,7 @@ public class ArtistFragment extends BaseFragment {
     private static final String ARTIST_KEY = "ARTIST_KEY";
     private Artist artist;
 
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.cover)
+    @BindView(R.id.cover_big)
     ImageView cover;
     @BindView(R.id.genres)
     TextView genres;
@@ -50,30 +45,17 @@ public class ArtistFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         updateToolBar(artist.getName());
 
-        Picasso.with(view.getContext())
+        Glide.with(view.getContext())
                 .load(artist.getCover().getBig())
-                .into(cover, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        progressBar.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
+                .centerCrop()
+                .crossFade()
+                .into(cover);
 
         genres.setText(artist.getGenres());
         info.setText(artist.getTracksAndAlbumsInfo(" ·"));
         description.setText(artist.getDescription());
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateToolBar(artist.getName());
-    }
 
     public static ArtistFragment newInstance(Artist artist) {
         Bundle args = new Bundle();

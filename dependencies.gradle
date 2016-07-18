@@ -23,7 +23,7 @@ ext.versions = [
         retrofit                     : '2.1.0',
         gson                         : '2.6.2',
         okhttp                       : '3.4.1',
-        picasso                      : '2.5.2',
+        glide                        : '3.7.0',
 
         supportLibs                  : '23.1.1',
         butterKnife                  : '8.0.1',
@@ -77,7 +77,7 @@ ext.libraries = [
         gson                    : "com.google.code.gson:gson:$versions.gson",
         okhttp                  : "com.squareup.okhttp3:okhttp:$versions.okhttp",
         okhttpLogging           : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
-        picasso                 : "com.squareup.picasso:picasso:$versions.picasso",
+        glide                   : "com.github.bumptech.glide:glide:$versions.glide",
 
         // Developer Tools
         stetho                  : "com.facebook.stetho:stetho:$versions.stetho",

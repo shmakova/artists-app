@@ -13,11 +13,10 @@
                   android:paddingBottom="@dimen/spacing_normal_16">
 
         <ImageView
-            android:id="@+id/cover"
+            android:id="@+id/cover_small"
             android:layout_width="@dimen/cover_size"
             android:layout_height="@dimen/cover_size"
             android:transitionName="@string/transition_cover"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/cover" />
 
         <RelativeLayout

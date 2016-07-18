@@ -1,7 +1,6 @@
 package ru.shmakova.artistsapp.ui.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -24,17 +23,17 @@ import ru.shmakova.artistsapp.R;
  */
 public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder> {
     private List<Artist> artists;
-    private ArtistViewHolder.CustomClickListener customClickListener;
+    private ArtistViewHolder.OnItemCLickListener onItemClickListener;
 
-    public ArtistsAdapter(List<Artist> artists, ArtistViewHolder.CustomClickListener customClickListener) {
+    public ArtistsAdapter(List<Artist> artists, ArtistViewHolder.OnItemCLickListener onItemClickListener) {
         this.artists = artists;
-        this.customClickListener = customClickListener;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
     public ArtistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_artists_list, parent, false);
-        return new ArtistViewHolder(convertView, customClickListener);
+        return new ArtistViewHolder(convertView, onItemClickListener);
     }
 
     @Override
@@ -42,10 +41,11 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
         Artist artist = artists.get(position);
         Context context = holder.cover.getContext();
 
-        Picasso.with(context)
+        Glide.with(context)
                 .load(artist.getCover().getSmall())
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
+                .crossFade()
                 .into(holder.cover);
 
         holder.name.setText(artist.getName());
@@ -59,7 +59,7 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
     }
 
     public static class ArtistViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.cover)
+        @BindView(R.id.cover_small)
         ImageView cover;
         @BindView(R.id.name)
         TextView name;
@@ -68,11 +68,11 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
         @BindView(R.id.info)
         TextView info;
 
-        private CustomClickListener listener;
+        private OnItemCLickListener listener;
 
-        public ArtistViewHolder(View itemView, CustomClickListener customClickListener) {
+        public ArtistViewHolder(View itemView, OnItemCLickListener OnItemClickListener) {
             super(itemView);
-            listener = customClickListener;
+            listener = OnItemClickListener;
 
             ButterKnife.bind(this, itemView);
         }
@@ -80,12 +80,12 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
         @OnClick(R.id.artist_item)
         public void onArtistItemClick(View view) {
             if (listener != null) {
-                listener.onArtistItemClickListener(getAdapterPosition());
+                listener.onItemClick(getAdapterPosition(), cover);
             }
         }
 
-        public interface CustomClickListener {
-            void onArtistItemClickListener(int position);
+        public interface OnItemCLickListener {
+            void onItemClick(int position, ImageView cover);
         }
     }
 }
