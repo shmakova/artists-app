@@ -16,6 +16,8 @@
     <string name="email">shmakova-nastya@yandex.ru</string>
     <string name="send_email">Отправить e-mail</string>
     <string name="email_subject">Обратная связь</string>
+    <string name="yandex_music">ru.yandex.music</string>
+    <string name="yandex_radio">ru.yandex.radio</string>
 
     <plurals name="tracks">
         <item quantity="zero">%d песен</item>

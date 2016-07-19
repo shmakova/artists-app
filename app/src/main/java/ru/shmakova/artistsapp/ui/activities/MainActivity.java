@@ -1,8 +1,11 @@
 package ru.shmakova.artistsapp.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +19,7 @@ import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.developer_settings.DeveloperSettingsModule;
 import ru.shmakova.artistsapp.ui.fragments.ArtistsListFragment;
+import ru.shmakova.artistsapp.ui.fragments.MusicFragment;
 import ru.shmakova.artistsapp.ui.other.ViewModifier;
 
 public class MainActivity extends BaseActivity {
@@ -39,6 +43,46 @@ public class MainActivity extends BaseActivity {
                     .replace(R.id.main_frame_layout, new ArtistsListFragment())
                     .commit();
         }
+    }
+
+    private BroadcastReceiver musicIntentReceiver;
+
+    @Override
+    protected void onResume() {
+        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+        musicIntentReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
+                    int state = intent.getIntExtra("state", -1);
+
+                    switch (state) {
+                        case 0:
+                            if (getSupportFragmentManager().findFragmentById(R.id.music_frame_layout) != null) {
+                                getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .remove(getSupportFragmentManager().findFragmentById(R.id.music_frame_layout))
+                                        .commit();
+                            }
+                            break;
+                        case 1:
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.music_frame_layout, new MusicFragment())
+                                    .commit();
+                            break;
+                    }
+                }
+            }
+        };
+        registerReceiver(musicIntentReceiver, filter);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(musicIntentReceiver);
+        super.onPause();
     }
 
     /**
@@ -87,8 +131,8 @@ public class MainActivity extends BaseActivity {
      */
     public void composeEmail() {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:" + R.string.email));
-        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.email_subject);
+        intent.setData(Uri.parse("mailto:" + getString(R.string.email)));
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
         startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
     }
 }
