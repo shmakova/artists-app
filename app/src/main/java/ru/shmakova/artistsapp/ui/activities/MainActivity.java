@@ -6,9 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,10 +23,17 @@ import ru.shmakova.artistsapp.R;
 import ru.shmakova.artistsapp.developer_settings.DeveloperSettingsModule;
 import ru.shmakova.artistsapp.ui.fragments.ArtistsListFragment;
 import ru.shmakova.artistsapp.ui.fragments.MusicFragment;
+import ru.shmakova.artistsapp.ui.fragments.MusicPreferenceFragment;
 import ru.shmakova.artistsapp.ui.other.ViewModifier;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements
+        SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "MainActivity";
+    private FragmentManager supportFragmentManager;
+    private SharedPreferences sharedPreferences;
+    private int currentHeadSetState;
+    private final static int HEADSET_PLUG_OUT = 0;
+    private final static int HEADSET_PLUG_IN = 1;
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
@@ -33,12 +43,15 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportFragmentManager = getSupportFragmentManager();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         App.get(this).applicationComponent().inject(this);
 
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
+            supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.main_frame_layout, new ArtistsListFragment())
                     .commit();
@@ -50,31 +63,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        musicIntentReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
-                    int state = intent.getIntExtra("state", -1);
-
-                    switch (state) {
-                        case 0:
-                            if (getSupportFragmentManager().findFragmentById(R.id.music_frame_layout) != null) {
-                                getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .remove(getSupportFragmentManager().findFragmentById(R.id.music_frame_layout))
-                                        .commit();
-                            }
-                            break;
-                        case 1:
-                            getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.music_frame_layout, new MusicFragment())
-                                    .commit();
-                            break;
-                    }
-                }
-            }
-        };
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        musicIntentReceiver = new MusicIntentReceiver();
         registerReceiver(musicIntentReceiver, filter);
         super.onResume();
     }
@@ -82,7 +72,27 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         unregisterReceiver(musicIntentReceiver);
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
+    }
+
+    /**
+     * Shows music bar
+     */
+    private void showMusicBar() {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.music_frame_layout, new MusicFragment())
+                .commit();
+    }
+
+    private void hideMusicBar() {
+        if (supportFragmentManager.findFragmentById(R.id.music_frame_layout) != null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .remove(getSupportFragmentManager().findFragmentById(R.id.music_frame_layout))
+                    .commit();
+        }
     }
 
     /**
@@ -101,6 +111,13 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.feedback:
                 composeEmail();
+                break;
+            case R.id.settings:
+                supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.main_frame_layout, new MusicPreferenceFragment())
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -134,5 +151,40 @@ public class MainActivity extends BaseActivity {
         intent.setData(Uri.parse("mailto:" + getString(R.string.email)));
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
         startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        updateMusicBar();
+    }
+
+    /**
+     * Updates music bar
+     */
+    private void updateMusicBar() {
+        boolean musicBarEnabled = sharedPreferences.getBoolean(getString(R.string.music_preference), false);
+
+        if (musicBarEnabled) {
+            switch (currentHeadSetState) {
+                case HEADSET_PLUG_OUT:
+                    hideMusicBar();
+                    break;
+                case HEADSET_PLUG_IN:
+                    showMusicBar();
+                    break;
+            }
+        } else {
+            hideMusicBar();
+        }
+    }
+
+    private class MusicIntentReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
+                currentHeadSetState = intent.getIntExtra("state", -1);
+                updateMusicBar();
+            }
+        }
     }
 }

@@ -6,22 +6,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.shmakova.artistsapp.R;
-import ru.shmakova.artistsapp.network.models.Artist;
-import ru.shmakova.artistsapp.ui.activities.MainActivity;
 
 public class MusicFragment extends BaseFragment {
     @BindView(R.id.yandex_music_button)
@@ -45,12 +38,12 @@ public class MusicFragment extends BaseFragment {
 
     @OnClick(R.id.yandex_music_button)
     public void onYandexMusicClick(View view) {
-        startNewActivity(view.getContext(), getString(R.string.yandex_music));
+        startNewActivity(view.getContext(), getString(R.string.yandex_music_package));
     }
 
     @OnClick(R.id.yandex_radio_button)
     public void onYandexRadioClick(View view) {
-        startNewActivity(view.getContext(), getString(R.string.yandex_radio));
+        startNewActivity(view.getContext(), getString(R.string.yandex_radio_package));
     }
 
     /**

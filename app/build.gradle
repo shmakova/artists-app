@@ -55,7 +55,7 @@ android {
 
             // Enables code coverage with Jacoco only for instrumentation tests.
             // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
-            //testCoverageEnabled true
+            testCoverageEnabled true
         }
     }
 
@@ -94,6 +94,7 @@ dependencies {
     compile libraries.supportDesign
     compile libraries.supportRecyclerView
     compile libraries.supportCardView
+    compile libraries.supportPreference
 
     compile libraries.butterKnife
     apt libraries.butterKnifeCompiler
