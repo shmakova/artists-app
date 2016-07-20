@@ -28,7 +28,7 @@ android {
     }
 
     signingConfigs {
-        yamblz {
+        artists {
             storeFile file('keystore.jks')
             storePassword 'shmakova'
             keyAlias 'shmakova'
@@ -38,7 +38,7 @@ android {
 
     buildTypes {
         debug {
-            signingConfig signingConfigs.yamblz
+            signingConfig signingConfigs.artists
             applicationIdSuffix '.debug'
 
             // Enables code coverage with Jacoco only for instrumentation tests.
@@ -47,13 +47,15 @@ android {
         }
 
         release {
-            signingConfig signingConfigs.yamblz
+            signingConfig signingConfigs.artists
+            shrinkResources false
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
 
             // Enables code coverage with Jacoco only for instrumentation tests.
             // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
-            testCoverageEnabled true
+            //testCoverageEnabled true
         }
     }
 
