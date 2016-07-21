@@ -58,7 +58,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        App.get(getContext()).applicationComponent().leakCanaryProxy().watch(this);
         super.onDestroy();
     }
 }

@@ -72,9 +72,8 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
 
         public ArtistViewHolder(View itemView, OnItemCLickListener OnItemClickListener) {
             super(itemView);
-            listener = OnItemClickListener;
-
             ButterKnife.bind(this, itemView);
+            listener = OnItemClickListener;
         }
 
         @OnClick(R.id.artist_item)

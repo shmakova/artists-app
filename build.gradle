@@ -24,15 +24,6 @@ buildscript {
         // Needed for Lint + Retrolambda.
         classpath gradlePlugins.lombok
 
-        // Code coverage.
-        classpath gradlePlugins.jacoco
-
-        // Performance metrics library for Android development.
-        classpath gradlePlugins.androidDevMetrics
-
-        // Catches common Java mistakes as compile-time errors.
-        classpath gradlePlugins.errorProne
-
         // Method count plugin for android projects
         classpath gradlePlugins.dexcount
 
@@ -61,40 +52,3 @@ task clean(type: Delete) {
 }
 
 ext.preDexLibs = !project.hasProperty('disablePreDex')
-subprojects {
-    project.plugins.whenPluginAdded { plugin ->
-        if ('com.android.build.gradle.AppPlugin'.equals(plugin.class.name) || 'com.android.build.gradle.LibraryPlugin'.equals(plugin.class.name)) {
-            // enable or disable pre-dexing
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        }
-    }
-
-    project.plugins.apply('net.ltgt.errorprone')
-
-    configurations.errorprone {
-        resolutionStrategy.force "com.google.errorprone:error_prone_core:${versions.errorProneCoreVersion}"
-    }
-
-    afterEvaluate {
-        tasks.findByName('pmd').dependsOn('assemble')
-        tasks.findByName('findbugs').dependsOn('assemble')
-
-        def checkTask = tasks.findByName('check')
-
-        checkTask.dependsOn('pmd')
-        checkTask.dependsOn('findbugs')
-        checkTask.dependsOn('checkstyle')
-
-        dependencyUpdates.outputDir = new File("${projectDir}/build/reports/versions")
-
-        // Log instrumentation tests results.
-        tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
-            task.doFirst {
-                logging.level = LogLevel.INFO
-            }
-            task.doLast {
-                logging.level = LogLevel.LIFECYCLE
-            }
-        }
-    }
-}

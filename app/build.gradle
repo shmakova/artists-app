@@ -1,10 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply from: '../code_quality_tools/jacoco.gradle'
-apply plugin: 'com.frogermcs.androiddevmetrics'
-apply from: '../code_quality_tools/quality.gradle'
-apply plugin: 'com.github.ben-manes.versions'
 
 android {
     // Declared in dependencies.gradle in the root of the project.
@@ -48,8 +44,8 @@ android {
 
         release {
             signingConfig signingConfigs.artists
-            shrinkResources false
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     'proguard-rules.pro'
 
@@ -57,22 +53,6 @@ android {
             // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
             testCoverageEnabled true
         }
-    }
-
-    lintOptions {
-        warningsAsErrors true
-        abortOnError true // Fail early.
-
-        disable 'GoogleAppIndexingWarning' // App does not have deep linking.
-        disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
-    }
-
-    packagingOptions {
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
     // This allows us see tests execution progress in the output on the CI.
@@ -109,13 +89,6 @@ dependencies {
     compile libraries.okhttp
     compile libraries.glide
     compile libraries.okhttpLogging
-
-    // Developer tools (Developer Settings)
-    compile libraries.stetho
-    compile libraries.leakCanary
-    compile libraries.tinyDancer
-    compile libraries.lynx
-    compile libraries.processPhoenix
 
     testCompile libraries.junit
     testCompile libraries.robolectric

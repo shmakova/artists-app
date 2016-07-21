@@ -1,6 +1,5 @@
 package ru.shmakova.artistsapp.ui.activities;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,31 +14,21 @@ import android.support.v7.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
-import ru.shmakova.artistsapp.developer_settings.DeveloperSettingsModule;
 import ru.shmakova.artistsapp.ui.fragments.ArtistsListFragment;
 import ru.shmakova.artistsapp.ui.fragments.MusicFragment;
 import ru.shmakova.artistsapp.ui.fragments.MusicPreferenceFragment;
-import ru.shmakova.artistsapp.ui.other.ViewModifier;
 
 public class MainActivity extends BaseActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "MainActivity";
+    private final static int HEADSET_PLUG_OUT = 0;
+    private final static int HEADSET_PLUG_IN = 1;
     private FragmentManager supportFragmentManager;
     private SharedPreferences sharedPreferences;
     private int currentHeadSetState;
-    private final static int HEADSET_PLUG_OUT = 0;
-    private final static int HEADSET_PLUG_IN = 1;
 
-    @Inject
-    @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
-    ViewModifier viewModifier;
-
-    @SuppressLint("InflateParams") // It's okay in our case.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +37,7 @@ public class MainActivity extends BaseActivity implements
 
         App.get(this).applicationComponent().inject(this);
 
-        setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
+        setContentView(getLayoutInflater().inflate(R.layout.activity_main, null));
 
         if (savedInstanceState == null) {
             supportFragmentManager

@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import ru.shmakova.artistsapp.developer_settings.DevMetricsProxy;
-import ru.shmakova.artistsapp.developer_settings.DeveloperSettingsModel;
 import timber.log.Timber;
 
 /**
@@ -34,12 +32,6 @@ public class App extends Application {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
-
-            DeveloperSettingsModel developerSettingModel = applicationComponent.developerSettingModel();
-            developerSettingModel.apply();
-
-            DevMetricsProxy devMetricsProxy = applicationComponent.devMetricsProxy();
-            devMetricsProxy.apply();
         }
     }
 
