@@ -55,7 +55,7 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
         int albums = artist.getAlbums();
         int tracks = artist.getTracks();
         holder.info.setText(resources.getQuantityString(R.plurals.albums, albums, albums) +
-                "," + resources.getQuantityString(R.plurals.tracks, tracks, tracks));
+                ", " + resources.getQuantityString(R.plurals.tracks, tracks, tracks));
     }
 
     @Override
