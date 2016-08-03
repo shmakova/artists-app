@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:drawablePadding="@dimen/spacing_small_8"
-        android:drawableTop="@mipmap/ic_yandex_music"
+        android:drawableTop="@mipmap/ic_yandex_radio"
         android:gravity="center"
         android:padding="5dp"
-        android:text="@string/yandex_music"/>
+        android:text="@string/yandex_radio"/>
 
 </LinearLayout>
