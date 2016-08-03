@@ -5,7 +5,6 @@ import android.content.Context;
 import java.util.List;
 
 import retrofit2.Call;
-import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.network.ServiceGenerator;
 import ru.shmakova.artistsapp.network.YandexService;
 import ru.shmakova.artistsapp.network.models.Artist;
@@ -16,24 +15,18 @@ import ru.shmakova.artistsapp.network.models.Artist;
 
 public class DataManager {
     private static DataManager INSTANCE = null;
-    private Context context;
     private YandexService yandexService;
 
-    public DataManager() {
-        this.context = App.getContext();
-        this.yandexService = ServiceGenerator.createService(YandexService.class);
+    private DataManager(Context context) {
+        this.yandexService = ServiceGenerator.createService(YandexService.class, context);
     }
 
-    public static DataManager getInstance() {
+    public static DataManager getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = new DataManager();
+            INSTANCE = new DataManager(context.getApplicationContext());
         }
 
         return INSTANCE;
-    }
-
-    public Context getContext() {
-        return context;
     }
 
     public Call<List<Artist>> getArtistsList() {

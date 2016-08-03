@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import ru.shmakova.artistsapp.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
-    private static final String TAG = "BaseActivity";
 
     @Nullable
     private Toolbar toolbar;

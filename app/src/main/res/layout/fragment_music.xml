@@ -1,55 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <View style="@style/line"></View>
+              android:layout_height="match_parent"
+              android:baselineAligned="false"
+              android:elevation="@dimen/spacing_small_8"
+              android:orientation="horizontal"
+              android:padding="@dimen/spacing_small_8">
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="@dimen/spacing_small_8">
+    <TextView
+        android:id="@+id/yandex_music_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="@dimen/spacing_small_8"
+        android:drawableTop="@mipmap/ic_yandex_music"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/yandex_music"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_yandex_music"
-                android:id="@+id/yandex_music_button"/>
-
-            <TextView
-                android:text="@string/yandex_music"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small_8" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_yandex_radio"
-                android:id="@+id/yandex_radio_button"/>
-
-            <TextView
-                android:text="@string/yandex_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small_8" />
-        </LinearLayout>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/yandex_radio_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="@dimen/spacing_small_8"
+        android:drawableTop="@mipmap/ic_yandex_music"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/yandex_music"/>
 
 </LinearLayout>

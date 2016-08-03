@@ -10,8 +10,8 @@ import android.net.NetworkInfo;
 public class Utils {
     /**
      * Network available check
-     * @param context
-     * @return
+     * @param context context
+     * @return network availability
      */
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm =

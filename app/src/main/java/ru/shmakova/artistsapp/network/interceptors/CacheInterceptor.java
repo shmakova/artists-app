@@ -10,6 +10,7 @@ import okhttp3.Response;
 /**
  * Created by shmakova on 21.04.16.
  */
+
 public class CacheInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {

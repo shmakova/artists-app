@@ -6,24 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.shmakova.artistsapp.R;
 
 public class MusicFragment extends BaseFragment {
-    @BindView(R.id.yandex_music_button)
-    ImageView yandexMusicButton;
-    @BindView(R.id.yandex_radio_button)
-    ImageView yandexRadioButton;
-
-
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,15 +32,15 @@ public class MusicFragment extends BaseFragment {
 
     /**
      * Starts new activity
-     * @param context
-     * @param packageName
+     * @param context context
+     * @param packageName package name of app
      */
     public void startNewActivity(Context context, String packageName) {
         Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
 
         if (intent == null) {
-            intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://details?id=" + packageName));
+            intent = new Intent(Intent.ACTION_VIEW)
+                    .setData(Uri.parse("market://details?id=" + packageName));
         }
 
         context.startActivity(intent);

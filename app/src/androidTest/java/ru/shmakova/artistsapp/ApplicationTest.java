@@ -43,7 +43,7 @@ public class ApplicationTest {
         onView(withId(R.id.genres)).check(matches(withText(ARTIST_GENRES)));
         onView(withId(R.id.info)).check(matches(isDisplayed()));
         onView(withId(R.id.description)).check(matches(isDisplayed()));
-        onView(withId(R.id.cover)).check(matches(isDisplayed()));
+        onView(withId(R.id.cover_big)).check(matches(isDisplayed()));
     }
 
     public static Matcher<Object> withArtistName(final String artistName) {

@@ -1,6 +1,7 @@
 package ru.shmakova.artistsapp.ui.adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
     public void onBindViewHolder(ArtistViewHolder holder, int position) {
         Artist artist = artists.get(position);
         Context context = holder.cover.getContext();
+        Resources resources = context.getResources();
 
         Glide.with(context)
                 .load(artist.getCover().getSmall())
@@ -50,7 +52,10 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
 
         holder.name.setText(artist.getName());
         holder.genres.setText(artist.getGenres());
-        holder.info.setText(artist.getTracksAndAlbumsInfo(","));
+        int albums = artist.getAlbums();
+        int tracks = artist.getTracks();
+        holder.info.setText(resources.getQuantityString(R.plurals.albums, albums, albums) +
+                "," + resources.getQuantityString(R.plurals.tracks, tracks, tracks));
     }
 
     @Override
@@ -70,14 +75,14 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistVi
 
         private OnItemCLickListener listener;
 
-        public ArtistViewHolder(View itemView, OnItemCLickListener OnItemClickListener) {
+        ArtistViewHolder(View itemView, OnItemCLickListener OnItemClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             listener = OnItemClickListener;
         }
 
         @OnClick(R.id.artist_item)
-        public void onArtistItemClick(View view) {
+        void onArtistItemClick() {
             if (listener != null) {
                 listener.onItemClick(getAdapterPosition(), cover);
             }

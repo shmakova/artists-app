@@ -1,8 +1,8 @@
 package ru.shmakova.artistsapp.ui.activities;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -22,13 +22,13 @@ import ru.shmakova.artistsapp.ui.fragments.MusicPreferenceFragment;
 
 public class MainActivity extends BaseActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "MainActivity";
     private final static int HEADSET_PLUG_OUT = 0;
     private final static int HEADSET_PLUG_IN = 1;
     private FragmentManager supportFragmentManager;
     private SharedPreferences sharedPreferences;
     private int currentHeadSetState;
 
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +75,9 @@ public class MainActivity extends BaseActivity implements
                 .commit();
     }
 
+    /**
+     * Hides music bar
+     */
     private void hideMusicBar() {
         if (supportFragmentManager.findFragmentById(R.id.music_frame_layout) != null) {
             supportFragmentManager
@@ -85,9 +88,10 @@ public class MainActivity extends BaseActivity implements
     }
 
     /**
-     * On Action bar back button pressed
-     * @param item
-     * @return
+     * On options menu item selected
+     *
+     * @param item of menu
+     * @return result of options item selected
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -125,9 +129,7 @@ public class MainActivity extends BaseActivity implements
         new AlertDialog.Builder(this)
                 .setTitle(R.string.about)
                 .setMessage(getString(R.string.about_text))
-                .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
+                .setNeutralButton(android.R.string.ok, (dialog, which) -> {
                 })
                 .show();
     }
@@ -136,9 +138,9 @@ public class MainActivity extends BaseActivity implements
      * Opens mail app
      */
     public void composeEmail() {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:" + getString(R.string.email)));
-        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
+        Intent intent = new Intent(Intent.ACTION_SENDTO)
+                .setData(Uri.parse("mailto:" + getString(R.string.email)))
+                .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
         startActivity(Intent.createChooser(intent, getString(R.string.send_email)));
     }
 

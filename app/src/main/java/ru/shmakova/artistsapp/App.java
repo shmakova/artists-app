@@ -10,13 +10,7 @@ import timber.log.Timber;
  * Created by shmakova on 17.04.16.
  */
 public class App extends Application {
-
-    private static Context context;
     private ApplicationComponent applicationComponent;
-
-    public static Context getContext(){
-        return context;
-    }
 
     // Prevent need in a singleton (global) reference to the application object.
     @NonNull
@@ -28,7 +22,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         applicationComponent = prepareApplicationComponent().build();
-        context = getApplicationContext();
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
