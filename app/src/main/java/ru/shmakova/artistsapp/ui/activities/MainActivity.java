@@ -8,14 +8,15 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
+import ru.shmakova.artistsapp.ui.fragments.AboutDialogFragment;
 import ru.shmakova.artistsapp.ui.fragments.ArtistsListFragment;
 import ru.shmakova.artistsapp.ui.fragments.MusicFragment;
 import ru.shmakova.artistsapp.ui.fragments.MusicPreferenceFragment;
@@ -110,12 +111,8 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void showAboutAlert() {
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.about)
-                .setMessage(getString(R.string.about_text))
-                .setNeutralButton(android.R.string.ok, (dialog, which) -> {
-                })
-                .show();
+        DialogFragment dialog = new AboutDialogFragment();
+        dialog.show(supportFragmentManager, "AboutDialogFragment");
     }
 
     /**
