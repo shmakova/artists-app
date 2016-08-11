@@ -21,13 +21,13 @@ public class MusicFragment extends BaseFragment {
     }
 
     @OnClick(R.id.yandex_music_button)
-    public void onYandexMusicClick(View view) {
-        startNewActivity(view.getContext(), getString(R.string.yandex_music_package));
+    public void onYandexMusicClick() {
+        startNewActivity(getActivity(), getString(R.string.yandex_music_package));
     }
 
     @OnClick(R.id.yandex_radio_button)
-    public void onYandexRadioClick(View view) {
-        startNewActivity(view.getContext(), getString(R.string.yandex_radio_package));
+    public void onYandexRadioClick() {
+        startNewActivity(getActivity(), getString(R.string.yandex_radio_package));
     }
 
     public void startNewActivity(Context context, String packageName) {
