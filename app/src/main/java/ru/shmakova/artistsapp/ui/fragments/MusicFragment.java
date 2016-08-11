@@ -22,15 +22,16 @@ public class MusicFragment extends BaseFragment {
 
     @OnClick(R.id.yandex_music_button)
     public void onYandexMusicClick() {
-        startNewActivity(getActivity(), getString(R.string.yandex_music_package));
+        startNewActivity(getString(R.string.yandex_music_package));
     }
 
     @OnClick(R.id.yandex_radio_button)
     public void onYandexRadioClick() {
-        startNewActivity(getActivity(), getString(R.string.yandex_radio_package));
+        startNewActivity(getString(R.string.yandex_radio_package));
     }
 
-    public void startNewActivity(Context context, String packageName) {
+    public void startNewActivity(String packageName) {
+        Context context = getActivity();
         Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
 
         if (intent == null) {
