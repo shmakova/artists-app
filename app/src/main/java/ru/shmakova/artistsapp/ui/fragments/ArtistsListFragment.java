@@ -75,7 +75,7 @@ public class ArtistsListFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<List<Artist>> call, Throwable t) {
-
+                Timber.e(t.getMessage());
             }
         });
     }
