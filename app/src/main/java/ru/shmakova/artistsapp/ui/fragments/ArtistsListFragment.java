@@ -56,21 +56,17 @@ public class ArtistsListFragment extends BaseFragment {
         call.enqueue(new Callback<List<Artist>>() {
             @Override
             public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
-                try {
-                    artists = response.body();
-                    artistsAdapter = new ArtistsAdapter(artists, (position, cover) -> {
-                        Artist artist = artists.get(position);
-                        Fragment artistFragment = ArtistFragment.newInstance(artist);
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_frame_layout, artistFragment)
-                                .addToBackStack(null)
-                                .commit();
-                    });
-                    recyclerView.setAdapter(artistsAdapter);
-                } catch (NullPointerException e) {
-                    Timber.e(e.getMessage());
-                }
+                artists = response.body();
+                artistsAdapter = new ArtistsAdapter(artists, (position, cover) -> {
+                    Artist artist = artists.get(position);
+                    Fragment artistFragment = ArtistFragment.newInstance(artist);
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_frame_layout, artistFragment)
+                            .addToBackStack(null)
+                            .commit();
+                });
+                recyclerView.setAdapter(artistsAdapter);
             }
 
             @Override
