@@ -30,11 +30,6 @@ public class MusicFragment extends BaseFragment {
         startNewActivity(view.getContext(), getString(R.string.yandex_radio_package));
     }
 
-    /**
-     * Starts new activity
-     * @param context context
-     * @param packageName package name of app
-     */
     public void startNewActivity(Context context, String packageName) {
         Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
 

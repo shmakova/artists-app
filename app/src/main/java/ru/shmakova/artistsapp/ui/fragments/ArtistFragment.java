@@ -73,10 +73,6 @@ public class ArtistFragment extends BaseFragment {
         return fragment;
     }
 
-    /**
-     * Updates toolbar
-     * @param text - toolbar's title
-     */
     private void updateToolBar(String text) {
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 

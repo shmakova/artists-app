@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         supportFragmentManager = getSupportFragmentManager();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        musicIntentReceiver = new MusicIntentReceiver();
 
         App.get(this).applicationComponent().inject(this);
 
@@ -52,7 +53,6 @@ public class MainActivity extends BaseActivity implements
     protected void onResume() {
         IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        musicIntentReceiver = new MusicIntentReceiver();
         registerReceiver(musicIntentReceiver, filter);
         super.onResume();
     }
@@ -64,9 +64,6 @@ public class MainActivity extends BaseActivity implements
         super.onPause();
     }
 
-    /**
-     * Shows music bar
-     */
     private void showMusicBar() {
         supportFragmentManager
                 .beginTransaction()
@@ -74,9 +71,6 @@ public class MainActivity extends BaseActivity implements
                 .commit();
     }
 
-    /**
-     * Hides music bar
-     */
     private void hideMusicBar() {
         if (supportFragmentManager.findFragmentById(R.id.music_frame_layout) != null) {
             supportFragmentManager
@@ -86,12 +80,6 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    /**
-     * On options menu item selected
-     *
-     * @param item of menu
-     * @return result of options item selected
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -121,9 +109,6 @@ public class MainActivity extends BaseActivity implements
         return true;
     }
 
-    /**
-     * Shows About alert
-     */
     private void showAboutAlert() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.about)
@@ -148,9 +133,6 @@ public class MainActivity extends BaseActivity implements
         updateMusicBar();
     }
 
-    /**
-     * Updates music bar
-     */
     private void updateMusicBar() {
         boolean musicBarEnabled = sharedPreferences.getBoolean(getString(R.string.music_preference), false);
 

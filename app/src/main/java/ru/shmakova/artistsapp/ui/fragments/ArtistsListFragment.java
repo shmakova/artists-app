@@ -80,10 +80,6 @@ public class ArtistsListFragment extends BaseFragment {
         });
     }
 
-
-    /**
-     * Updates toolbar
-     */
     private void updateToolBar() {
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {

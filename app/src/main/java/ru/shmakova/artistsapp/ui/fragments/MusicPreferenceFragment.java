@@ -25,9 +25,6 @@ public class MusicPreferenceFragment extends PreferenceFragmentCompat {
         updateToolBar();
     }
 
-    /**
-     * Updates toolbar
-     */
     private void updateToolBar() {
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 
