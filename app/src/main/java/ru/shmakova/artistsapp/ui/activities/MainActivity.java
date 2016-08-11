@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity implements
 
         App.get(this).applicationComponent().inject(this);
 
-        setContentView(getLayoutInflater().inflate(R.layout.activity_main, null));
+        setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
             supportFragmentManager
