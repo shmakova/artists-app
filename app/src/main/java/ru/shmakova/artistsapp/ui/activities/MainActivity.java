@@ -27,6 +27,7 @@ public class MainActivity extends BaseActivity implements
     private FragmentManager supportFragmentManager;
     private SharedPreferences sharedPreferences;
     private int currentHeadSetState;
+    private BroadcastReceiver musicIntentReceiver;
 
     @SuppressLint("InflateParams")
     @Override
@@ -46,8 +47,6 @@ public class MainActivity extends BaseActivity implements
                     .commit();
         }
     }
-
-    private BroadcastReceiver musicIntentReceiver;
 
     @Override
     protected void onResume() {
