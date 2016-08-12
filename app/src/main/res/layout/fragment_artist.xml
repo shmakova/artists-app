@@ -4,51 +4,49 @@
             android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/cover_big"
             android:layout_width="match_parent"
             android:layout_height="@dimen/cover_big_height"
-            android:transitionName="@string/transition_cover"
-            android:contentDescription="@string/cover" />
+            android:contentDescription="@string/cover"/>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/spacing_medial_24">
+            android:layout_margin="@dimen/spacing_medial_24"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/genres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_normal_16" />
+                android:layout_marginBottom="@dimen/spacing_normal_16"/>
 
             <TextView
                 android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_normal_16" />
+                android:layout_marginBottom="@dimen/spacing_normal_16"/>
 
             <TextView
                 android:id="@+id/biography"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_medium_20"
-                android:textColor="@color/black"
+                android:layout_marginBottom="@dimen/spacing_small_8"
                 android:text="@string/biography"
-                android:layout_marginBottom="@dimen/spacing_small_8" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_medium_20"/>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:lineSpacingExtra="@dimen/spacing_small_8" />
+                android:lineSpacingExtra="@dimen/spacing_small_8"
+                android:textColor="@color/black"/>
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>
