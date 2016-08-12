@@ -7,7 +7,6 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import ru.shmakova.artistsapp.ui.activities.MainActivity;
 
 @Singleton
 @Component(modules = {
@@ -15,8 +14,7 @@ import ru.shmakova.artistsapp.ui.activities.MainActivity;
 })
 public interface ApplicationComponent {
 
-    @NonNull @Named(ApplicationModule.MAIN_THREAD_HANDLER)
+    @NonNull
+    @Named(ApplicationModule.MAIN_THREAD_HANDLER)
     Handler mainThreadHandler();
-
-    void inject(@NonNull MainActivity mainActivity);
 }

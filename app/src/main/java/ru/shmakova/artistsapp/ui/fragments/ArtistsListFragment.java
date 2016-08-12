@@ -13,24 +13,29 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
-import ru.shmakova.artistsapp.managers.DataManager;
+import ru.shmakova.artistsapp.network.YandexService;
 import ru.shmakova.artistsapp.network.models.Artist;
 import ru.shmakova.artistsapp.ui.activities.MainActivity;
 import ru.shmakova.artistsapp.ui.adapters.ArtistsAdapter;
 import timber.log.Timber;
 
 public class ArtistsListFragment extends BaseFragment {
-    private DataManager dataManager;
     private List<Artist> artists;
     private ArtistsAdapter artistsAdapter;
 
     @BindView(R.id.artists_list)
     RecyclerView recyclerView;
+
+    @Inject
+    YandexService yandexService;
 
     @NonNull
     @Override
@@ -43,15 +48,15 @@ public class ArtistsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        App.get(getActivity()).yandexComponent().inject(this);
         updateToolBar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        dataManager = DataManager.getInstance(getContext());
         loadArtists();
     }
 
     private void loadArtists() {
-        Call<List<Artist>> call = dataManager.getArtistsList();
+        Call<List<Artist>> call = yandexService.getArtistsList();
 
         call.enqueue(new Callback<List<Artist>>() {
             @Override

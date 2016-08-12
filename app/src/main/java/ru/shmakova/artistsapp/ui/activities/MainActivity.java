@@ -10,9 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import javax.inject.Inject;
 
 import ru.shmakova.artistsapp.App;
 import ru.shmakova.artistsapp.R;
@@ -26,19 +27,20 @@ public class MainActivity extends BaseActivity implements
     private final static int HEADSET_PLUG_OUT = 0;
     private final static int HEADSET_PLUG_IN = 1;
     private FragmentManager supportFragmentManager;
-    private SharedPreferences sharedPreferences;
     private int currentHeadSetState;
     private BroadcastReceiver musicIntentReceiver;
+
+    @Inject
+    SharedPreferences sharedPreferences;
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportFragmentManager = getSupportFragmentManager();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         musicIntentReceiver = new MusicIntentReceiver();
 
-        App.get(this).applicationComponent().inject(this);
+        App.get(this).networkComponent().inject(this);
 
         setContentView(R.layout.activity_main);
 
