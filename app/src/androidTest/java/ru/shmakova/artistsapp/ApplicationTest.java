@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
-import ru.shmakova.artistsapp.models.Artist;
-import ru.shmakova.artistsapp.views.MainActivity;
+import ru.shmakova.artistsapp.network.models.Artist;
+import ru.shmakova.artistsapp.ui.activities.MainActivity;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
@@ -43,7 +43,7 @@ public class ApplicationTest {
         onView(withId(R.id.genres)).check(matches(withText(ARTIST_GENRES)));
         onView(withId(R.id.info)).check(matches(isDisplayed()));
         onView(withId(R.id.description)).check(matches(isDisplayed()));
-        onView(withId(R.id.cover)).check(matches(isDisplayed()));
+        onView(withId(R.id.cover_big)).check(matches(isDisplayed()));
     }
 
     public static Matcher<Object> withArtistName(final String artistName) {

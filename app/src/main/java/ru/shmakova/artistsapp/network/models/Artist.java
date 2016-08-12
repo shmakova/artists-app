@@ -1,13 +1,10 @@
-package ru.shmakova.artistsapp.models;
+package ru.shmakova.artistsapp.network.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
-
-import ru.shmakova.artistsapp.App;
-import ru.shmakova.artistsapp.R;
 
 /**
  * Created by shmakova on 12.04.16.
@@ -54,12 +51,6 @@ public class Artist implements Parcelable {
         return TextUtils.join(", ", genres);
     }
 
-    public String getTracksAndAlbumsInfo(String separateString) {
-        return App.getContext().getResources().getQuantityString(R.plurals.albums, albums, albums)
-                + separateString + " "
-                + App.getContext().getResources().getQuantityString(R.plurals.tracks, tracks, tracks);
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -77,7 +68,7 @@ public class Artist implements Parcelable {
         dest.writeString(this.link);
     }
 
-    protected Artist(Parcel in) {
+    private Artist(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
         this.genres = in.createStringArrayList();
@@ -99,4 +90,9 @@ public class Artist implements Parcelable {
             return new Artist[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Artist: " + name;
+    }
 }

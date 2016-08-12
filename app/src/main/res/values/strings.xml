@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">ArtistsApp</string>
+    <string name="content">Hello</string>
     <string name="main_activity_name">Исполнители</string>
     <string name="biography">Биография</string>
     <string name="cover">Обложка</string>
@@ -7,8 +8,21 @@
     <string name="error_message">Невозможно загрузить данные из интернета</string>
     <string name="retry">Повторить</string>
     <string name="network_unavailable">Сеть недоступна</string>
-    <string name="host_url"></string>
     <string name="transition_cover">cover</string>
+    <string name="about">О программе</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="about_text">Тестовое приложение для проекта Яндекса «Мобилизация»</string>
+    <string name="email">shmakova-nastya@yandex.ru</string>
+    <string name="send_email">Отправить e-mail</string>
+    <string name="email_subject">Обратная связь по приложению Артисты</string>
+    <string name="yandex_music_package">ru.yandex.music</string>
+    <string name="yandex_radio_package">ru.yandex.radio</string>
+    <string name="yandex_music">Яндекс.Музыка</string>
+    <string name="yandex_radio">Яндекс.Радио</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_music_text">Включить панельку</string>
+    <string name="settings_music_summary">с Музыкой и Радио</string>
+    <string name="music_preference">music_preference</string>
 
     <plurals name="tracks">
         <item quantity="zero">%d песен</item>
